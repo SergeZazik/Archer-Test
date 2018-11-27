@@ -96,7 +96,7 @@ class ArticleAPIView(generics.ListCreateAPIView,
         article_id = data.get('article_id')
         try:
             article = Article.objects.get(id=article_id)
-            if request.user == article.creator or request.user.user_type == 'editor':
+            if request.user == article.creator or request.user.user_type == UserTypes.EDITOR.value:
                 article.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
             return Response('only Editor or creator can edit or delete post!', status=status.HTTP_403_FORBIDDEN)
