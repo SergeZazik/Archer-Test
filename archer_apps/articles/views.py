@@ -85,7 +85,7 @@ class ArticleAPIView(generics.ListCreateAPIView,
             edited_article = Article.objects.filter(id=article_id).update(
                 title=title,
                 content=content,
-                is_moderated=moderated
+                status=moderated
             )
             serializer = ArticleSerializer(Article.objects.filter(id=edited_article.id), many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
